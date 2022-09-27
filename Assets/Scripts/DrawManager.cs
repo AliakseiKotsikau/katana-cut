@@ -7,11 +7,14 @@ public class DrawManager : MonoBehaviour
     public const float RESOLUTION = 0.1f;
 
     [SerializeField]
-    private Line linePrefab;
+    private Line colliderLinePrefab;
+    [SerializeField]
+    private Line slashLinePrefab;
 
     private Camera cam;
 
-    private Line currentLine;
+    private Line slashLine;
+    private Line colliderLine;
 
     // Start is called before the first frame update
     void Start()
@@ -19,24 +22,37 @@ public class DrawManager : MonoBehaviour
         cam = Camera.main;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void CreateColliderLine(Vector3 mousePosition)
     {
-        if(Input.GetMouseButtonDown(0))
-        {
-            Vector2 mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
-            currentLine = Instantiate(linePrefab, mousePos, Quaternion.identity);
-        }
-        
-        if(Input.GetMouseButton(0))
-        {
-            Vector2 mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
-            currentLine.AddPoint(mousePos);
-        }
+        Vector2 mousePos = cam.ScreenToWorldPoint(mousePosition);
+        colliderLine = Instantiate(colliderLinePrefab, mousePos, Quaternion.identity);
+    }
 
-        if(Input.GetMouseButtonUp(0))
-        {
-            currentLine.Simplify();
-        }
+    public void AddPointToColliderLine(Vector3 mousePosition)
+    {
+        Vector2 mousePos = cam.ScreenToWorldPoint(mousePosition);
+        colliderLine.AddPoint(mousePos);
+    }
+
+    public void FinishColliderLine()
+    {
+        colliderLine.Simplify();
+    }
+
+    public void CreateSlashLine(Vector3 mousePosition)
+    {
+        Vector2 mousePos = cam.ScreenToWorldPoint(mousePosition);
+        slashLine = Instantiate(slashLinePrefab, mousePos, Quaternion.identity);
+    }
+    
+    public void AddPointToSlashLine(Vector3 mousePosition)
+    {
+        Vector2 mousePos = cam.ScreenToWorldPoint(mousePosition);
+        slashLine.AddPoint(mousePos);
+    }
+
+    public void FinishSlashLine()
+    {
+        slashLine.Simplify();
     }
 }
