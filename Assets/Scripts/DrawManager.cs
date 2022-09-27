@@ -57,4 +57,12 @@ public class DrawManager : MonoBehaviour
 
         return slashLine.GetLinePoints();
     }
+
+    public void DestroySlashLine()
+    {
+        if (slashLine)
+        {
+            Destroy(slashLine.gameObject);
+        }
+    }
 }

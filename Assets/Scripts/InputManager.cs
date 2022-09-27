@@ -14,6 +14,7 @@ public class InputManager : MonoBehaviour
     void Start()
     {
         drawManager = GetComponent<DrawManager>();
+        playerSlash.SlashFinished += drawManager.DestroySlashLine;
     }
 
     // Update is called once per frame
