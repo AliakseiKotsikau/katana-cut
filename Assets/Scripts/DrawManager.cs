@@ -51,8 +51,10 @@ public class DrawManager : MonoBehaviour
         slashLine.AddPoint(mousePos);
     }
 
-    public void FinishSlashLine()
+    public Vector3[] FinishSlashLine()
     {
         slashLine.Simplify();
+
+        return slashLine.GetLinePoints();
     }
 }

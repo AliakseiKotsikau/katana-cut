@@ -16,7 +16,7 @@ public class ColliderLine : Line
 
     public override void Simplify()
     {
-        lineRenderer.Simplify(0.3f);
+        lineRenderer.Simplify(SIMPLIFICATION_FACTOR);
 
         SetColliderPoints();
     }

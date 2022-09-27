@@ -5,6 +5,9 @@ using UnityEngine;
 [RequireComponent(typeof(DrawManager))]
 public class InputManager : MonoBehaviour
 {
+    [SerializeField]
+    private PlayerSlash playerSlash;
+
     private DrawManager drawManager;
 
     // Start is called before the first frame update
@@ -39,12 +42,14 @@ public class InputManager : MonoBehaviour
         if (Input.GetMouseButtonDown(1))
         {
             drawManager.CreateSlashLine(Input.mousePosition);
+            playerSlash.SetAttackPreparationSprite();
         }else if (Input.GetMouseButton(1))
         {
             drawManager.AddPointToSlashLine(Input.mousePosition);
         }else if (Input.GetMouseButtonUp(1))
         {
-            drawManager.FinishSlashLine();
+            Vector3[] points = drawManager.FinishSlashLine();
+            playerSlash.FollowLine(points);
         }
     }
 }

@@ -5,6 +5,8 @@ using UnityEngine;
 [RequireComponent(typeof(LineRenderer))]
 public class Line : MonoBehaviour
 {
+    protected float SIMPLIFICATION_FACTOR = 0.5f;
+
     protected LineRenderer lineRenderer;
 
     // Start is called before the first frame update
@@ -30,6 +32,14 @@ public class Line : MonoBehaviour
 
     public virtual void Simplify()
     {
-        lineRenderer.Simplify(0.3f);
+        lineRenderer.Simplify(SIMPLIFICATION_FACTOR);
+    }
+
+    public Vector3[] GetLinePoints()
+    {
+        Vector3[] points = new Vector3[lineRenderer.positionCount];
+        lineRenderer.GetPositions(points);
+
+        return points;
     }
 }
